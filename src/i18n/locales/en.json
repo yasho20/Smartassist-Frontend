@@ -1,0 +1,31 @@
+{
+  "nav": {
+    "home": "Home",
+    "getHelp": "Get Help",
+    "book": "Book",
+    "ratings": "Ratings",
+    "admin": "Admin"
+  },
+  "home": {
+    "title": "SmartAssist",
+    "subtitle": "Describe your health issue and get instant AI-powered specialist recommendations.",
+    "getStarted": "Get Started →",
+    "feature1Title": "AI Recommendations",
+    "feature1Desc": "Get instant specialist suggestions based on your symptoms.",
+    "feature2Title": "Easy Booking",
+    "feature2Desc": "Book appointments with top specialists in just a few clicks.",
+    "feature3Title": "Multilingual",
+    "feature3Desc": "Access SmartAssist in your preferred language."
+  },
+  "problem": {
+    "title": "Describe Your Problem",
+    "subtitle": "Select a category and explain your issue to get the best specialist recommendation.",
+    "selectCategory": "Select Category:",
+    "describeIssue": "Describe Your Issue:",
+    "placeholder": "E.g. I have been having severe headaches for the past week...",
+    "submit": "Get Recommendation →",
+    "errorCategory": "Please select a category.",
+    "errorEmpty": "Please describe your issue.",
+    "errorShort": "Please describe your issue in at least 10 characters."
+  }
+}
