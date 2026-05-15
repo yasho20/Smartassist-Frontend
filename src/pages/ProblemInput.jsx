@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const categories = [
   { label: "Mental Health", icon: "🧠" },
@@ -16,24 +17,63 @@ export default function ProblemInput() {
   const [issue, setIssue] = useState("");
   const [selected, setSelected] = useState(null);
   const [error, setError] = useState("");
+  const [listening, setListening] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { darkMode } = useAuth();
 
+  const handleVoiceInput = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      toast.error("Voice input not supported in this browser!");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+    setListening(true);
+    toast("🎤 Listening... Speak now!", { icon: "🎙️" });
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setIssue((prev) => prev ? prev + " " + transcript : transcript);
+      setListening(false);
+      toast.success("Voice captured! ✅");
+    };
+
+    recognition.onerror = () => {
+      setListening(false);
+      toast.error("Could not capture voice. Try again!");
+    };
+
+    recognition.onend = () => {
+      setListening(false);
+    };
+  };
+
   const handleSubmit = () => {
     if (!selected) {
       setError(t("problem.errorCategory"));
+      toast.error(t("problem.errorCategory"));
       return;
     }
     if (!issue.trim()) {
       setError(t("problem.errorEmpty"));
+      toast.error(t("problem.errorEmpty"));
       return;
     }
     if (issue.trim().length < 10) {
       setError(t("problem.errorShort"));
+      toast.error(t("problem.errorShort"));
       return;
     }
     setError("");
+    toast.success("Problem submitted! Getting recommendations... 🤖");
     navigate("/home/recommendation");
   };
 
@@ -68,7 +108,23 @@ export default function ProblemInput() {
           ))}
         </div>
 
-        <p className={`font-semibold mb-2 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>{t("problem.describeIssue")}</p>
+        {/* Describe Issue + Voice Button */}
+        <div className="flex justify-between items-center mb-2">
+          <p className={`font-semibold ${darkMode ? "text-gray-300" : "text-gray-700"}`}>{t("problem.describeIssue")}</p>
+          <button
+            onClick={handleVoiceInput}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition duration-200
+              ${listening
+                ? "bg-red-500 text-white animate-pulse"
+                : darkMode
+                ? "bg-gray-700 text-blue-400 border border-gray-600 hover:bg-gray-600"
+                : "bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100"
+              }`}
+          >
+            {listening ? "🔴 Listening..." : "🎤 Voice Input"}
+          </button>
+        </div>
+
         <textarea
           placeholder={t("problem.placeholder")}
           maxLength={500}
