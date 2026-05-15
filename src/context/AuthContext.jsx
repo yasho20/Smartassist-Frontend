@@ -6,6 +6,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [problems, setProblems] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   const login = (username, role) => {
     setUser({ username, role });
@@ -25,8 +26,12 @@ export function AuthProvider({ children }) {
     setProblems((prev) => [...prev, problem]);
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, bookings, addBooking, problems, addProblem }}>
+    <AuthContext.Provider value={{ user, login, logout, bookings, addBooking, problems, addProblem, darkMode, toggleDarkMode }}>
       {children}
     </AuthContext.Provider>
   );

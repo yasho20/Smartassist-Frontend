@@ -1,18 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { darkMode } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 px-4">
+    <div className={`min-h-screen flex flex-col items-center justify-center px-4 ${darkMode ? "bg-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100"}`}>
 
       <div className="text-center max-w-2xl">
-        <h1 className="text-6xl font-extrabold text-blue-700 mb-4">
+        <h1 className={`text-6xl font-extrabold mb-4 ${darkMode ? "text-blue-400" : "text-blue-700"}`}>
           {t("home.title")}
         </h1>
-        <p className="text-xl text-gray-600 mb-8">
+        <p className={`text-xl mb-8 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
           {t("home.subtitle")}
         </p>
         <button
@@ -24,20 +26,20 @@ export default function Home() {
       </div>
 
       <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
-        <div className="bg-white rounded-2xl shadow-md p-6 text-center">
+        <div className={`rounded-2xl shadow-md p-6 text-center ${darkMode ? "bg-gray-800" : "bg-white"}`}>
           <div className="text-4xl mb-3">🤖</div>
-          <h3 className="text-lg font-bold text-blue-700 mb-2">{t("home.feature1Title")}</h3>
-          <p className="text-gray-500 text-sm">{t("home.feature1Desc")}</p>
+          <h3 className={`text-lg font-bold mb-2 ${darkMode ? "text-blue-400" : "text-blue-700"}`}>{t("home.feature1Title")}</h3>
+          <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{t("home.feature1Desc")}</p>
         </div>
-        <div className="bg-white rounded-2xl shadow-md p-6 text-center">
+        <div className={`rounded-2xl shadow-md p-6 text-center ${darkMode ? "bg-gray-800" : "bg-white"}`}>
           <div className="text-4xl mb-3">📅</div>
-          <h3 className="text-lg font-bold text-blue-700 mb-2">{t("home.feature2Title")}</h3>
-          <p className="text-gray-500 text-sm">{t("home.feature2Desc")}</p>
+          <h3 className={`text-lg font-bold mb-2 ${darkMode ? "text-blue-400" : "text-blue-700"}`}>{t("home.feature2Title")}</h3>
+          <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{t("home.feature2Desc")}</p>
         </div>
-        <div className="bg-white rounded-2xl shadow-md p-6 text-center">
+        <div className={`rounded-2xl shadow-md p-6 text-center ${darkMode ? "bg-gray-800" : "bg-white"}`}>
           <div className="text-4xl mb-3">🌍</div>
-          <h3 className="text-lg font-bold text-blue-700 mb-2">{t("home.feature3Title")}</h3>
-          <p className="text-gray-500 text-sm">{t("home.feature3Desc")}</p>
+          <h3 className={`text-lg font-bold mb-2 ${darkMode ? "text-blue-400" : "text-blue-700"}`}>{t("home.feature3Title")}</h3>
+          <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>{t("home.feature3Desc")}</p>
         </div>
       </div>
 
