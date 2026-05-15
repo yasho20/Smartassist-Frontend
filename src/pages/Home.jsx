@@ -2,25 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
 
-const healthTips = [
-  { tip: "Drink at least 8 glasses of water daily to stay hydrated! 💧", icon: "💧" },
-  { tip: "Take a 10-minute walk after every meal to aid digestion. 🚶", icon: "🚶" },
-  { tip: "Sleep 7-8 hours every night for a healthy mind and body. 😴", icon: "😴" },
-  { tip: "Eat more fruits and vegetables for essential vitamins. 🥦", icon: "🥦" },
-  { tip: "Practice deep breathing for 5 minutes to reduce stress. 🧘", icon: "🧘" },
-  { tip: "Limit screen time before bed for better sleep quality. 📵", icon: "📵" },
-  { tip: "Wash your hands regularly to prevent infections. 🧼", icon: "🧼" },
-  { tip: "Smile more! It boosts your mood and immune system. 😊", icon: "😊" },
-  { tip: "Exercise at least 30 minutes a day to stay fit. 🏃", icon: "🏃" },
-  { tip: "Avoid skipping breakfast — it's the most important meal! 🍳", icon: "🍳" },
-];
-
-const todayTip = healthTips[new Date().getDate() % healthTips.length];
+const tipIcons = ["💧", "🚶", "😴", "🥦", "🧘", "📵", "🧼", "😊", "🏃", "🍳"];
 
 export default function Home() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { darkMode, user } = useAuth();
+
+  const tips = t("home.tips", { returnObjects: true });
+  const todayIndex = new Date().getDate() % tips.length;
+  const todayTip = tips[todayIndex];
+  const todayIcon = tipIcons[todayIndex];
 
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center px-4 ${darkMode ? "bg-gray-900" : "bg-gradient-to-br from-blue-50 to-blue-100"}`}>
@@ -49,13 +41,13 @@ export default function Home() {
       {/* Health Tip of the Day */}
       <div className={`mt-10 w-full max-w-2xl rounded-2xl p-5 border-l-4 border-blue-500 shadow-md flex items-start gap-4
         ${darkMode ? "bg-gray-800" : "bg-white"}`}>
-        <div className="text-4xl">{todayTip.icon}</div>
+        <div className="text-4xl">{todayIcon}</div>
         <div>
           <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${darkMode ? "text-blue-400" : "text-blue-500"}`}>
-            💡 Health Tip of the Day
+            {t("home.tipLabel")}
           </p>
           <p className={`text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
-            {todayTip.tip}
+            {todayTip}
           </p>
         </div>
       </div>

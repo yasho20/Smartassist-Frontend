@@ -15,7 +15,20 @@
     "feature2Title": "Easy Booking",
     "feature2Desc": "Book appointments with top specialists in just a few clicks.",
     "feature3Title": "Multilingual",
-    "feature3Desc": "Access SmartAssist in your preferred language."
+    "feature3Desc": "Access SmartAssist in your preferred language.",
+    "tipLabel": "💡 Health Tip of the Day",
+    "tips": [
+      "Drink at least 8 glasses of water daily to stay hydrated! 💧",
+      "Take a 10-minute walk after every meal to aid digestion. 🚶",
+      "Sleep 7-8 hours every night for a healthy mind and body. 😴",
+      "Eat more fruits and vegetables for essential vitamins. 🥦",
+      "Practice deep breathing for 5 minutes to reduce stress. 🧘",
+      "Limit screen time before bed for better sleep quality. 📵",
+      "Wash your hands regularly to prevent infections. 🧼",
+      "Smile more! It boosts your mood and immune system. 😊",
+      "Exercise at least 30 minutes a day to stay fit. 🏃",
+      "Avoid skipping breakfast — it's the most important meal! 🍳"
+    ]
   },
   "problem": {
     "title": "Describe Your Problem",
