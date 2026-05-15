@@ -32,12 +32,11 @@ export default function ProblemInput() {
       return;
     }
     setError("");
-    navigate("/recommendation");
+    navigate("/home/recommendation");
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex flex-col items-center justify-center px-4 py-10">
-
       <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-2xl">
 
         <h1 className="text-4xl font-extrabold text-blue-700 mb-2 text-center">
@@ -87,7 +86,6 @@ export default function ProblemInput() {
         </button>
 
       </div>
-
     </div>
   );
 }
